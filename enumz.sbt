@@ -6,6 +6,7 @@ lazy val root = project.root
   .setName("enumz")
   .setDescription("Common type class interface for various enums implementations")
   .configureRoot
+  .noPublish
   .aggregate(enumzJVM, enumzJS)
 
 lazy val enumz = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).build.from("enumz")
