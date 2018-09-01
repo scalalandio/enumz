@@ -107,9 +107,11 @@ object Settings extends Dependencies {
     Compile / compile / wartremoverWarnings ++= Warts.allBut(
       Wart.Any,
       Wart.DefaultArguments,
+      Wart.Equals,
       Wart.ExplicitImplicitTypes,
       Wart.ImplicitConversion,
       Wart.ImplicitParameter,
+      Wart.OptionPartial,
       Wart.Overloading,
       Wart.PublicInference,
       Wart.NonUnitStatements,
