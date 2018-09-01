@@ -16,8 +16,9 @@ lazy val enumz = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure)
   .publish
   .jvmSettings(Test / compileOrder := CompileOrder.JavaThenScala)
   .settings(libraryDependencies ++= Seq(
-    "org.specs2" %%% "specs2-core"       % Dependencies.specs2Version % "test",
-    "org.specs2" %%% "specs2-scalacheck" % Dependencies.specs2Version % "test"
+    "org.specs2" %%% "specs2-core"          % Dependencies.specs2Version % "test",
+    "org.specs2" %%% "specs2-scalacheck"    % Dependencies.specs2Version % "test",
+    "org.specs2" %%% "specs2-matcher-extra" % Dependencies.specs2Version % "test"
   ))
 
 lazy val enumzJVM = enumz.jvm

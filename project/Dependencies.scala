@@ -26,7 +26,6 @@ object Dependencies {
   )
 
   val enumeratum         = libraryDependencies += "com.beachape"    %%% "enumeratum"        % enumeratumVersion
-  val shapeless          = libraryDependencies += "com.chuusai"     %%% "shapeless"         % "2.3.3"
 }
 
 trait Dependencies {
@@ -40,7 +39,7 @@ trait Dependencies {
   // resolvers
   val commonResolvers = resolvers
 
-  val mainDeps = Seq(enumeratum, shapeless)
+  val mainDeps = Seq(enumeratum)
 
   implicit class ProjectRoot(project: Project) {
 
