@@ -59,10 +59,10 @@ object TestSumType {
 ```
 
 ```scala
-import enumeratum._
+import enumeratum.{Enum => EnumeratumEnum, _}
 
 sealed trait TestEnumeratum extends EnumEntry
-object TestEnumeratum extends EEnum[TestEnumeratum] {
+object TestEnumeratum extends EnumeratumEnum[TestEnumeratum] {
   val values = findValues
   case object A extends TestEnumeratum
   case object B extends TestEnumeratum
@@ -74,7 +74,7 @@ object TestEnumeratum extends EEnum[TestEnumeratum] {
 import io.scalaland.enumz.Enum
 
 Enum[TestJavaEnum].values
-Enum[TestEnumeration].values
+Enum[TestEnumeration.TestEnumeration].values
 Enum[TestSumType].values
 Enum[TestEnumeratum].values
 ```
@@ -84,11 +84,13 @@ You can also test it with ammonite like:
 ```scala
 import $ivy.`io.scalaland::enumz:0.1.0`, io.scalaland.enumz.Enum
 
+{
 sealed trait TestSumType extends Product with Serializable
 object TestSumType {
   case object A extends TestSumType
   case object B extends TestSumType
   case object C extends TestSumType
+}
 }
 
 Enum[TestSumType].values
