@@ -60,7 +60,6 @@ object Settings extends Dependencies {
       "-Xcheckinit",
       "-Xfatal-warnings",
       "-Xfuture",
-      // "-Xstrict-patmat-analysis", // Typelevel Scala only
       // linting
       "-Xlint",
       "-Xlint:adapted-args",
@@ -82,7 +81,7 @@ object Settings extends Dependencies {
       "-Xlint:type-parameter-shadow",
       "-Xlint:unsound-match"
     ),
-    Compile / console / scalacOptions --= Seq(
+    console / scalacOptions --= Seq(
       // warnings
       "-Ywarn-unused:implicits",
       "-Ywarn-unused:imports",
@@ -115,7 +114,8 @@ object Settings extends Dependencies {
       Wart.Overloading,
       Wart.PublicInference,
       Wart.NonUnitStatements,
-      Wart.Nothing
+      Wart.Nothing,
+      Wart.ToString
     )
   ) ++ mainDeps
 
@@ -124,7 +124,7 @@ object Settings extends Dependencies {
     homepage := Some(url("https://scalaland.io")),
     licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     scmInfo := Some(
-      ScmInfo(url("https://github.com/scalalandio/catnip"), "scm:git:git@github.com:scalalandio/catnip.git")
+      ScmInfo(url("https://github.com/scalalandio/enumz"), "scm:git:git@github.com:scalalandio/enumz.git")
     ),
     publishTo := {
       val nexus = "https://oss.sonatype.org/"

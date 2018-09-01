@@ -18,7 +18,7 @@ trait Enum[E] {
   def withNameInsensitive(name: String): Option[E] = withNameInsensitiveOption(name)
 }
 
-object Enum {
+object Enum extends JavaEnumImplicits with  EnumerationImplicits with EnumeratumImplicits {
 
   @inline def apply[E](implicit enum: Enum[E]): Enum[E] = enum
 }
