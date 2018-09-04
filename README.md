@@ -100,7 +100,7 @@ Enum[TestSumType].values
 
 ```scala
 Enum[TestSumType].values // Vector(TestSumType.A, TestSumType.B, TestSumType.C)
-Enum[TestSumType].indices // Vector(TestSumType.A -> 0, TestSumType.B -> 1, TestSumType.C -> 2)
+Enum[TestSumType].indices // Map(TestSumType.A -> 0, TestSumType.B -> 1, TestSumType.C -> 2)
 
 Enum[TestSumType].getName(TestSumType.A) // "A"
 Enum[TestSumType].getIndex(TestSumType.A) // 0
