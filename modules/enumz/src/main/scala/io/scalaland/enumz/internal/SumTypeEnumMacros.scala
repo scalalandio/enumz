@@ -5,6 +5,7 @@ import scala.reflect.macros.blackbox._
 
 object SumTypeEnumMacros {
 
+  @SuppressWarnings(Array("org.wartremover.warts.Equals"))
   def enum[E: c.WeakTypeTag](c: Context): c.Expr[Enum[E]] = {
     import c.universe.{ Symbol => CSymbol, _ }
 

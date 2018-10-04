@@ -38,6 +38,7 @@ object Settings extends Dependencies {
       "-language:implicitConversions",
       "-language:postfixOps",
       // private options
+      "-Xexperimental",
       "-Yno-adapted-args",
       "-Ypartial-unification",
       // warnings
@@ -50,9 +51,6 @@ object Settings extends Dependencies {
       "-Ywarn-nullary-unit",
       "-Ywarn-numeric-widen",
       "-Ywarn-unused:implicits",
-      "-Ywarn-unused:imports",
-      "-Ywarn-unused:locals",
-      "-Ywarn-unused:params",
       "-Ywarn-unused:patvars",
       "-Ywarn-unused:privates",
       "-Ywarn-value-discard",
@@ -61,7 +59,6 @@ object Settings extends Dependencies {
       "-Xfatal-warnings",
       "-Xfuture",
       // linting
-      "-Xlint",
       "-Xlint:adapted-args",
       "-Xlint:by-name-right-associative",
       "-Xlint:constant",
@@ -77,9 +74,27 @@ object Settings extends Dependencies {
       "-Xlint:poly-implicit-overload",
       "-Xlint:private-shadow",
       "-Xlint:stars-align",
-      // "-Xlint:strict-unsealed-patmat", // Typelevel Scala only
       "-Xlint:type-parameter-shadow",
       "-Xlint:unsound-match"
+    ).filterNot(
+      (if (scalaVersion.value.startsWith("2.13")) Set(
+        // removed in 2.13.x
+        "-Yno-adapted-args",
+        "-Ypartial-unification",
+        // only for 2.11.x
+        "-Xexperimental"
+      ) else if (scalaVersion.value.startsWith("2.12")) Set(
+        // only for 2.11.x
+        "-Xexperimental"
+      ) else if (scalaVersion.value.startsWith("2.11")) Set(
+        // added in 2.12.x
+        "-Ywarn-extra-implicit",
+        "-Ywarn-macros:after",
+        "-Ywarn-unused:implicits",
+        "-Ywarn-unused:patvars",
+        "-Ywarn-unused:privates",
+        "-Xlint:constant"
+      ) else Set.empty[String]).contains _
     ),
     console / scalacOptions --= Seq(
       // warnings
@@ -107,11 +122,9 @@ object Settings extends Dependencies {
       Wart.Any,
       Wart.AsInstanceOf,
       Wart.DefaultArguments,
-      Wart.Equals,
       Wart.ExplicitImplicitTypes,
       Wart.ImplicitConversion,
       Wart.ImplicitParameter,
-      Wart.OptionPartial,
       Wart.Overloading,
       Wart.PublicInference,
       Wart.NonUnitStatements,
@@ -121,7 +134,6 @@ object Settings extends Dependencies {
   ) ++ mainDeps
 
   private val publishSettings = Seq(
-    organization := "io.scalaland",
     homepage := Some(url("https://scalaland.io")),
     licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     scmInfo := Some(
@@ -139,20 +151,19 @@ object Settings extends Dependencies {
     pomIncludeRepository := { _ =>
       false
     },
-    pomExtra := (
+    pomExtra :=
       <developers>
         <developer>
           <id>krzemin</id>
           <name>Piotr Krzemiński</name>
-          <url>http://github.com/krzemin</url>
+          <url>https://github.com/krzemin</url>
         </developer>
         <developer>
           <id>MateuszKubuszok</id>
           <name>Mateusz Kubuszok</name>
-          <url>http://github.com/MateuszKubuszok</url>
+          <url>https://github.com/MateuszKubuszok</url>
         </developer>
       </developers>
-      )
   )
 
   private val noPublishSettings =
