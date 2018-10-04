@@ -4,6 +4,6 @@
 dependencyOverrides ++= Seq(
   "com.beachape" % "enumeratum-macros_2.12" % "1.5.9",
   "com.beachape" % "enumeratum_sjs0.6_2.12" % "1.5.13",
-  "org.scala-js" % "scalajs-library_2.12" % "0.6.24"
+  "org.scala-js" % "scalajs-library_2.12" % "0.6.25"
 )
-// LIBRARY_DEPENDENCIES_HASH cdc4f1092884ec1749a8c0ec0a149f0dacddc0bd
+// LIBRARY_DEPENDENCIES_HASH 579595ebbc8eff05b3ccbae732bf4fb72b7480da

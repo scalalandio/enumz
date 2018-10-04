@@ -2,6 +2,7 @@ package io.scalaland.enumz
 
 import scala.language.dynamics
 
+@SuppressWarnings(Array("org.wartremover.warts.Equals", "org.wartremover.warts.OptionPartial"))
 trait Enum[E] extends Dynamic {
 
   def values: Vector[E]
