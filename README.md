@@ -21,7 +21,7 @@ With a type class.
 
 ## Usage
 
-Add to your sbt
+Add to your sbt (2.11 and 2.12 supported)
 
 ```scala
 libraryDependencies += "io.scalaland" %% "enumz" % enumzVersion // see Maven badge
@@ -82,7 +82,7 @@ Enum[TestEnumeratum].values
 You can also test it with ammonite like:
 
 ```scala
-import $ivy.`io.scalaland::enumz:0.1.0`, io.scalaland.enumz.Enum
+import $ivy.`io.scalaland::enumz:0.1.1`, io.scalaland.enumz.Enum
 
 {
 sealed trait TestSumType extends Product with Serializable

@@ -8,8 +8,8 @@ import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport._
 object Dependencies {
 
   // scala version
-  val scalaOrganization = "org.scala-lang" // "org.typelevel"
-  val scalaVersion      = "2.12.7" // "2.12.4-bin-typelevel-4"
+  val scalaOrganization  = "org.scala-lang" // "org.typelevel"
+  val scalaVersion       = "2.12.7" // "2.12.4-bin-typelevel-4"
   val crossScalaVersions = Seq("2.11.12", "2.12.7")
 
   // build tools version

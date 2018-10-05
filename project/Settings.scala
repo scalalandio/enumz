@@ -39,6 +39,7 @@ object Settings extends Dependencies {
       "-language:postfixOps",
       // private options
       "-Xexperimental",
+      "-Ybackend-parallelism", "8",
       "-Yno-adapted-args",
       "-Ypartial-unification",
       // warnings
@@ -88,6 +89,7 @@ object Settings extends Dependencies {
         "-Xexperimental"
       ) else if (scalaVersion.value.startsWith("2.11")) Set(
         // added in 2.12.x
+        "-Ybackend-parallelism", "8",
         "-Ywarn-extra-implicit",
         "-Ywarn-macros:after",
         "-Ywarn-unused:implicits",
