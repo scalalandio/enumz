@@ -5,4 +5,4 @@ dependencyOverrides ++= Seq(
   "com.beachape" % "enumeratum-macros_2.12" % "1.5.9",
   "com.beachape" % "enumeratum_2.12" % "1.5.13"
 )
-// LIBRARY_DEPENDENCIES_HASH b0a03fd0ed70a0eba35b3a0a1e157fb1630b0a77
+// LIBRARY_DEPENDENCIES_HASH 5e5a09804c046588bd048634f5478ad00852d80e
