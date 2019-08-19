@@ -25,6 +25,21 @@ lazy val enumz = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure)
 lazy val enumzJVM = enumz.jvm
 lazy val enumzJS = enumz.js
 
+lazy val readme = scalatex.ScalatexReadme(
+    projectId = "readme",
+    wd        = file(""),
+    url       = "https://github.com/scalalandio/enumz/tree/master",
+    source    = "Readme"
+  )
+  .configureModule
+  .noPublish
+  .enablePlugins(GhpagesPlugin)
+  .settings(
+    siteSourceDirectory := target.value / "scalatex",
+    git.remoteRepo := "git@github.com:scalalandio/enumz.git",
+    Jekyll / makeSite / includeFilter := new FileFilter { def accept(p: File) = true }
+  )
+
 addCommandAlias("fullTest", ";test;scalastyle")
 addCommandAlias("fullCoverageTest", ";coverage;test;coverageReport;coverageAggregate;scalastyle")
 addCommandAlias("relock", ";unlock;reload;update;lock")
