@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/scalalandio/enumz.svg?branch=master)](https://travis-ci.org/scalalandio/enumz)
 [![Maven Central](https://img.shields.io/maven-central/v/io.scalaland/enumz_2.12.svg)](http://search.maven.org/#search%7Cga%7C1%7Cenumz)
+[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.17.svg)](https://www.scala-js.org)
 [![License](http://img.shields.io/:license-Apache%202-green.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 One enum type class to rule them all.
@@ -21,7 +22,7 @@ With a type class.
 
 ## Usage
 
-Add to your sbt (2.11 and 2.12 supported)
+Add to your sbt (2.11, 2.12 and 2.13 supported)
 
 ```scala
 libraryDependencies += "io.scalaland" %% "enumz" % enumzVersion // see Maven badge
@@ -82,7 +83,7 @@ Enum[TestEnumeratum].values
 You can also test it with ammonite like:
 
 ```scala
-import $ivy.`io.scalaland::enumz:0.1.1`, io.scalaland.enumz.Enum
+import $ivy.`io.scalaland::enumz:1.0.0`, io.scalaland.enumz.Enum
 
 {
 sealed trait TestSumType extends Product with Serializable

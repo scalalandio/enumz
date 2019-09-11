@@ -45,11 +45,11 @@
     @p
       Add to your sbt (2.11 and 2.12 supported):
     @hl.scala
-      libraryDependencies += "io.scalaland" %% "enumz" % "0.1.2"
+      libraryDependencies += "io.scalaland" %% "enumz" % "1.0.0"
     @p
       or, if you use Scala.js
     @hl.scala
-      libraryDependencies += "io.scalaland" %%% "enumz" % "0.1.2"
+      libraryDependencies += "io.scalaland" %%% "enumz" % "1.0.0"
     @p
       From now on you can define enums whatever you want and use one common interface
       for all of them.
