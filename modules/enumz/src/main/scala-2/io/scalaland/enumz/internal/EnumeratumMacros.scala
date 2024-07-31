@@ -7,13 +7,19 @@ object EnumeratumMacros {
 
   def `enum`[E <: enumeratum.EnumEntry: c.WeakTypeTag](c: Context): c.Expr[Enum[E]] = {
     import c.universe.*
-    val valueType = weakTypeOf[E].dealias
-    val objectName = valueType.typeSymbol.companion.name.toTermName
+
+    val E = weakTypeOf[E].dealias
+    val enumExpr = c.Expr[enumeratum.Enum[E]](
+      c.inferImplicitValue(c.weakTypeOf[enumeratum.Enum[E]], silent = false, withMacrosDisabled = false)
+    )
+
     c.Expr[Enum[E]](
-      q"""new io.scalaland.enumz.Enum[$valueType] {
-            lazy val values: Vector[$valueType] = $objectName.values.toVector
-            def getName(enum: $valueType): String = enum.entryName
-          }"""
+      q"""
+      new io.scalaland.enumz.Enum[$E] {
+        lazy val values: Vector[$E] = $enumExpr.values.toVector
+        def getName(`enum`: $E): String = `enum`.entryName
+      }
+      """
     )
   }
 }

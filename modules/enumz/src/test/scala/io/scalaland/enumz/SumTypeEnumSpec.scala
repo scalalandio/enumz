@@ -1,17 +1,12 @@
 package io.scalaland.enumz
 
-import org.specs2.mutable.Specification
+class SumTypeEnumSpec extends munit.FunSuite {
 
-class SumTypeEnumSpec extends Specification {
+  test("Enum should derive instance for scala.Enumeration enum") {
+    val `enum` = Enum[TestSumType]
 
-  "Enum" should {
-
-    "derive instance for scala.Enumeration enum" in {
-      val enum = Enum[TestSumType]
-
-      enum.values must_== Vector(TestSumType.A, TestSumType.B, TestSumType.C)
-      enum.values.map(enum.getName) must_== Vector("A", "B", "C")
-      enum.values.map(enum.getIndex) must_== Vector(0, 1, 2)
-    }
+    assertEquals(`enum`.values, Vector(TestSumType.A, TestSumType.B, TestSumType.C))
+    assertEquals(`enum`.values.map(`enum`.getName), Vector("A", "B", "C"))
+    assertEquals(`enum`.values.map(`enum`.getIndex), Vector(0, 1, 2))
   }
 }

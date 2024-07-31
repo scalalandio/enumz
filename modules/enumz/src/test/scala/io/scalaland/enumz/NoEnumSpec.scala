@@ -1,17 +1,12 @@
 package io.scalaland.enumz
 
-import org.specs2.mutable.Specification
-import org.specs2.execute.Typecheck.*
-import org.specs2.matcher.TypecheckMatchers.*
+class NoEnumSpec extends munit.FunSuite {
 
-class NoEnumSpec extends Specification {
-
-  final case object NotEnum
-
-  "Enum" should {
-
-    "not derive a type class for non-enum type" in {
-      tc"""Enum[NotEnum]""" must not(succeed)
-    }
+  test("Enum should not derive a type class for non-enum type") {
+    assert(
+      compileErrors("""Enum[NotEnum.type]""").contains(
+        """Can only enumerate values of an enum which is implemented as sealed trait/class"""
+      )
+    )
   }
 }
