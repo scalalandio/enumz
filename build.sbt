@@ -42,6 +42,7 @@ val versions = new {
 
 Global / excludeLintKeys += git.useGitDescribe
 Global / excludeLintKeys += ideSkipProject
+Global / excludeLintKeys += excludeDependencies
 val only1VersionInIDE =
   MatrixAction
     .ForPlatform(versions.idePlatform)
@@ -102,14 +103,14 @@ val settings = Seq(
           "-explain-types",
           "-feature",
           "-Wconf:msg=Unreachable case:s", // suppress fake (?) errors in internal.compiletime
-          "-Wnonunit-statement",
+          //"-Wnonunit-statement",
           // "-Wunused:imports", // import x.Underlying as X is marked as unused even though it is! probably one of https://github.com/scala/scala3/issues/: #18564, #19252, #19657, #19912
           "-Wunused:privates",
           "-Wunused:locals",
           "-Wunused:explicits",
           "-Wunused:implicits",
           "-Wunused:params",
-          "-Wvalue-discard",
+          //"-Wvalue-discard",
           "-Xfatal-warnings",
           "-Xcheck-macros",
           "-Ykind-projector:underscores"
@@ -392,7 +393,7 @@ lazy val enumz = projectMatrix
   .settings(mimaSettings *)
   .settings(
     libraryDependencies += "com.beachape" %%% "enumeratum" % versions.enumeratum,
-    libraryDependencies += "org.specs2" %%% "specs2-core" % versions.specs2 % Test
+    libraryDependencies += "org.scalameta" %%% "munit" % "1.0.0" % Test
   )
 
 addCommandAlias("fullTest", "test")

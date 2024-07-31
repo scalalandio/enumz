@@ -1,17 +1,12 @@
 package io.scalaland.enumz
 
-import org.specs2.mutable.Specification
+class JavaEnumEnumSpec extends munit.FunSuite {
 
-class JavaEnumEnumSpec extends Specification {
+  test("Enum should derive instance for Java enum") {
+    val `enum` = Enum[TestJavaEnum]
 
-  "Enum" should {
-
-    "derive instance for Java enum" in {
-      val enum = Enum[TestJavaEnum]
-
-      enum.values must_== Vector(TestJavaEnum.A, TestJavaEnum.B, TestJavaEnum.C)
-      enum.values.map(enum.getName) must_== Vector("A", "B", "C")
-      enum.values.map(enum.getIndex) must_== Vector(0, 1, 2)
-    }
+    assertEquals(`enum`.values, Vector(TestJavaEnum.A, TestJavaEnum.B, TestJavaEnum.C))
+    assertEquals(`enum`.values.map(`enum`.getName), Vector("A", "B", "C"))
+    assertEquals(`enum`.values.map(`enum`.getIndex), Vector(0, 1, 2))
   }
 }
