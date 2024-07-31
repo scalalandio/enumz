@@ -1,6 +1,6 @@
 package io.scalaland.enumz
 
-import enumeratum.{Enum => EEnum, _}
+import enumeratum.{Enum as EEnum, *}
 
 sealed trait TestEnumeratum extends EnumEntry
 object TestEnumeratum extends EEnum[TestEnumeratum] {

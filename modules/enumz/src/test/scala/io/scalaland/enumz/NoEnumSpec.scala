@@ -1,8 +1,8 @@
 package io.scalaland.enumz
 
 import org.specs2.mutable.Specification
-import org.specs2.execute.Typecheck._
-import org.specs2.matcher.TypecheckMatchers._
+import org.specs2.execute.Typecheck.*
+import org.specs2.matcher.TypecheckMatchers.*
 
 class NoEnumSpec extends Specification {
 

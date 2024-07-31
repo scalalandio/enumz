@@ -1,13 +1,13 @@
 package io.scalaland.enumz.internal
 
 import io.scalaland.enumz.Enum
-import scala.reflect.macros.blackbox._
+import scala.reflect.macros.blackbox.*
 
 private[enumz] object EnumerationMacros {
 
-  def enum[E <: Enumeration#Value: c.WeakTypeTag](c: Context): c.Expr[Enum[E]] = {
-    import c.universe._
-    val valueType = implicitly[c.WeakTypeTag[E]].tpe.dealias
+  def `enum`[E <: Enumeration#Value: c.WeakTypeTag](c: Context): c.Expr[Enum[E]] = {
+    import c.universe.*
+    val valueType = weakTypeOf[E].dealias
     val objectStr = valueType.toString.replaceFirst(".Value$", "")
     val objectName = c.typecheck(c.parse(s"$objectStr: $objectStr.type"))
     c.Expr[Enum[E]](
