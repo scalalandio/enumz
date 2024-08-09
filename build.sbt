@@ -103,14 +103,14 @@ val settings = Seq(
           "-explain-types",
           "-feature",
           "-Wconf:msg=Unreachable case:s", // suppress fake (?) errors in internal.compiletime
-          //"-Wnonunit-statement",
+          // "-Wnonunit-statement",
           // "-Wunused:imports", // import x.Underlying as X is marked as unused even though it is! probably one of https://github.com/scala/scala3/issues/: #18564, #19252, #19657, #19912
           "-Wunused:privates",
           "-Wunused:locals",
           "-Wunused:explicits",
           "-Wunused:implicits",
           "-Wunused:params",
-          //"-Wvalue-discard",
+          // "-Wvalue-discard",
           "-Xfatal-warnings",
           "-Xcheck-macros",
           "-Ykind-projector:underscores"
@@ -268,12 +268,12 @@ val publishSettings = Seq(
 val mimaSettings = Seq(
   mimaPreviousArtifacts := {
     val previousVersions = moduleName.value match {
-      case "enumz" => Set("1.0.0")
+      case "enumz" => Set("1.0.0").filterNot(_ => scalaVersion.value == versions.scala3)
       case _       => Set()
     }
     previousVersions.map(organization.value %% moduleName.value % _)
   },
-  mimaFailOnNoPrevious := true
+  mimaFailOnNoPrevious := false // Scala 3 has no previous
 )
 
 val noPublishSettings =
