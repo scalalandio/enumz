@@ -10,10 +10,12 @@ private[enumz] object JavaEnumMacros {
     val valueType = implicitly[c.WeakTypeTag[E]].tpe.dealias
     val objectName = valueType.typeSymbol.companion.name.toTermName
     c.Expr[Enum[E]](
-      q"""new io.scalaland.enumz.Enum[$valueType] {
-            lazy val values: Vector[$valueType] = $objectName.values.toVector
-            def getName(enum: $valueType): String = enum.name
-          }"""
+      q"""
+      new io.scalaland.enumz.Enum[$valueType] {
+        lazy val values: Vector[$valueType] = $objectName.values.toVector
+        def getName(enum: $valueType): String = enum.name
+      }
+      """
     )
   }
 }
