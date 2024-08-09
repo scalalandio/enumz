@@ -2,5 +2,5 @@ package io.scalaland.enumz
 
 trait EnumeratumImplicits {
 
-  implicit def enumeratumEnum[E <: enumeratum.EnumEntry]: Enum[E] = ???
+  inline given enumeratumEnum[E <: enumeratum.EnumEntry]: Enum[E] = ${ internal.EnumeratumMacros.`enum`[E] }
 }
