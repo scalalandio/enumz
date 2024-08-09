@@ -2,5 +2,5 @@ package io.scalaland.enumz
 
 trait SumTypeEnumImplicits {
 
-  implicit def sumTypeEnum[E]: Enum[E] = ???
+  inline given sumTypeEnum[E]: Enum[E] = ${ internal.SumTypeEnumMacros.`enum`[E] }
 }
