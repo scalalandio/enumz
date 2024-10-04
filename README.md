@@ -1,9 +1,15 @@
 # enumz
 
-[![Build Status](https://travis-ci.org/scalalandio/enumz.svg?branch=master)](https://travis-ci.org/scalalandio/enumz)
-[![Maven Central](https://img.shields.io/maven-central/v/io.scalaland/enumz_2.12.svg)](http://search.maven.org/#search%7Cga%7C1%7Cenumz)
-[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.17.svg)](https://www.scala-js.org)
+[![Chimney Scala version support](https://index.scala-lang.org/scalalandio/enumz/enumz/latest.svg)](https://index.scala-lang.org/scalalandio/enumz/enumz)
+
+[![CI build](https://github.com/scalalandio/enumz/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/scalalandio/enumz/actions)
 [![License](http://img.shields.io/:license-Apache%202-green.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+[![Documentation Status](https://readthedocs.org/projects/enumz/badge/?version=latest)](https://readthedocs.org/projects/enumz/builds/)
+[![Scaladoc 2.11](https://javadoc.io/badge2/io.scalaland/enumz_2.11/scaladoc%202.11.svg)](https://javadoc.io/doc/io.scalaland/enumz_2.11)
+[![Scaladoc 2.12](https://javadoc.io/badge2/io.scalaland/enumz_2.12/scaladoc%202.12.svg)](https://javadoc.io/doc/io.scalaland/enumz_2.12)
+[![Scaladoc 2.13](https://javadoc.io/badge2/io.scalaland/enumz_2.13/scaladoc%202.13.svg)](https://javadoc.io/doc/io.scalaland/enumz_2.13)
+[![Scaladoc 3](https://javadoc.io/badge2/io.scalaland/enumz_3/scaladoc%203.svg)](https://javadoc.io/doc/io.scalaland/enumz_3)
 
 One enum type class to rule them all.
 
