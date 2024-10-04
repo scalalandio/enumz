@@ -1,7 +1,7 @@
 package io.scalaland.enumz.internal
 
 import io.scalaland.enumz.Enum
-import scala.reflect.macros.blackbox.*
+import scala.reflect.macros.whitebox.*
 
 object SumTypeEnumMacros {
 
@@ -18,7 +18,7 @@ object SumTypeEnumMacros {
     val order = Ordering.fromLessThan[Position]((a, b) => a.line < b.line || (a.line == b.line && a.column < b.column))
     val children: List[CSymbol] = symbol.knownDirectSubclasses.toList.sortBy(_.pos)(order)
     if (!children.forall(_.isModuleClass)) {
-      c.abort(c.enclosingPosition, "All children must be (case) objects.")
+      c.abort(c.enclosingPosition, s"All children of ${weakTypeOf[E].dealias} must be (case) objects.")
     }
 
     val sourceModuleRef: CSymbol => Ident = sym => Ident(sym.asInstanceOf[ISymbol].sourceModule.asInstanceOf[CSymbol])

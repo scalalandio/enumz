@@ -19,7 +19,7 @@ object SumTypeEnumMacros {
     def extractRecursively(sym: Symbol): List[Symbol] =
       if sym.flags.is(Flags.Sealed) then sym.children.flatMap(extractRecursively)
       else if sym.flags.is(Flags.Enum) || sym.flags.is(Flags.Module) then List(sym)
-      else report.errorAndAbort("All children must be (case) objects.")
+      else report.errorAndAbort(s"All children of ${E.show} must be (case) objects.")
 
     given Ordering[Option[Position]] = Ordering.Option(Ordering.fromLessThan[Position] { (a, b) =>
       a.startLine < b.startLine || (a.startLine == b.startLine && a.startColumn < b.startColumn)
