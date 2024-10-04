@@ -8,18 +8,18 @@ class EnumPartialTransformerSpec extends munit.FunSuite {
   test("Convert between enums") {
 
     assertEquals(
-      Enum[TestEnumeration.TestEnumeration].values.transformInto[Vector[TestEnumeratum]],
-      Enum[TestEnumeratum].values
+      Enum[TestEnumeration.TestEnumeration].values.transformIntoPartial[Vector[TestEnumeratum]].asOption,
+      Some(Enum[TestEnumeratum].values)
     )
 
     assertEquals(
-      Enum[TestEnumeratum].values.transformInto[Vector[TestSumType]],
-      Enum[TestSumType].values
+      Enum[TestEnumeratum].values.transformIntoPartial[Vector[TestSumType]].asOption,
+      Some(Enum[TestSumType].values)
     )
 
     assertEquals(
-      Enum[TestSumType].values.transformInto[Vector[TestEnumeration.TestEnumeration]],
-      Enum[TestEnumeration.TestEnumeration].values
+      Enum[TestSumType].values.transformIntoPartial[Vector[TestEnumeration.TestEnumeration]].asOption,
+      Some(Enum[TestEnumeration.TestEnumeration].values)
     )
   }
 }

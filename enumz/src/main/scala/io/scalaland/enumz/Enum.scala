@@ -23,11 +23,12 @@ trait Enum[E] extends Dynamic {
   def selectDynamic(name: String): E = withName(name)
 }
 
-object Enum extends Implicits {
+object Enum extends Implicits0 {
 
   def apply[E](implicit `enum`: Enum[E]): Enum[E] = `enum`
 }
 
-trait Implicits extends JavaEnumImplicits with EnumerationImplicits with EnumeratumImplicits with LowPriorityImplicits
-
-trait LowPriorityImplicits extends SumTypeEnumImplicits
+private[enumz] trait Implicits0 extends JavaEnumImplicits with Implicits1
+private[enumz] trait Implicits1 extends EnumerationImplicits with Implicits2
+private[enumz] trait Implicits2 extends EnumeratumImplicits with Implicits3
+private[enumz] trait Implicits3 extends SumTypeEnumImplicits
