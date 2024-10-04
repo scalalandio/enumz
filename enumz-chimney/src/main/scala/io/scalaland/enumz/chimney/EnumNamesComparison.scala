@@ -6,5 +6,13 @@ trait EnumNamesComparison {
 }
 object EnumNamesComparison {
 
-  implicit val strictEquality: EnumNamesComparison = (fromName: String, toName: String) => fromName == toName
+  implicit val default: EnumNamesComparison = Implicits.strictEquality
+
+  object Implicits {
+
+    implicit val strictEquality: EnumNamesComparison = (fromName: String, toName: String) => fromName == toName
+
+    implicit val caseInsensitiveEquality: EnumNamesComparison = (fromName: String, toName: String) =>
+      fromName.equalsIgnoreCase(toName)
+  }
 }
