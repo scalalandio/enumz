@@ -134,3 +134,52 @@ You can also test it with Scala CLI like:
 
      Enum[TestSumType].`A` // TestSumType.A
     ```
+
+## Chimney integration
+
+Add:
+
+```scala
+libraryDependencies += "io.scalaland" %% "enumz-chimney" % "{{ enumz_version() }}"
+```
+
+and then import:
+
+```scala
+import io.scalaland.enumz.chimney._
+```
+
+to be able to transform between all supported types with `PartialTransformer`s
+
+!!! example
+
+    ```scala
+    Enum[TestEnumeration.TestEnumeration].values
+      .transformIntoPartial[Vector[TestEnumeratum]]
+      .asOption == Some(Enum[TestEnumeratum].values)
+
+    Enum[TestEnumeratum].values
+      .transformIntoPartial[Vector[TestSumType]]
+      .asOption == Some(Enum[TestSumType].values)
+
+    Enum[TestSumType].values
+      .transformIntoPartial[Vector[TestEnumeration.TestEnumeration]]
+      .asOption == Some(Enum[TestEnumeration.TestEnumeration].values)
+    ```
+
+    Provide your own implicit `EnumNamesComparison` to control how enum values' names would be compared in runtime:
+
+    ```scala
+    // the default
+    import EnumNamesComparison.Implicits.strictEquality
+    // case-insensitice
+    import EnumNamesComparison.Implicits.caseInsensitiveEquality
+
+    implicit val yourOwnComparator: EnumNamesComparison =
+      (fromName: String, toName: String) => ...
+    ```
+
+!!! tip
+
+    Since Chimney is able to convert between sealed traits/scala 3 enums/Java enums without failing, use this module
+    only if you want to move the transformation into runtime, e.g. to support `scala.Enumaration`.
