@@ -12,7 +12,7 @@ object SumTypeEnumMacros {
 
     val E = TypeRepr.of[E]
 
-    if !E.typeSymbol.flags.is(Flags.Sealed) then {
+    if !(E.typeSymbol.flags.is(Flags.Sealed)) then {
       report.errorAndAbort("Can only enumerate values of an enum which is implemented as sealed trait/class.")
     }
 
