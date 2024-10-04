@@ -34,7 +34,7 @@ val versions = new {
   val idePlatform = VirtualAxis.jvm
 
   // Dependencies
-  val enumeratum = "1.7.4"
+  val enumeratum = "1.7.5"
   val specs2 = "4.20.8"
 }
 
