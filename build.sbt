@@ -1,5 +1,4 @@
 import com.jsuereth.sbtpgp.PgpKeys.publishSigned
-import com.typesafe.tools.mima.core.{Problem, ProblemFilters}
 import commandmatrix.extra.*
 
 // Used to configure the build so that it would format on compile during development but not on CI.
@@ -21,9 +20,9 @@ ciRelease := {
 // Versions:
 
 val versions = new {
-  val scala212 = "2.12.19"
-  val scala213 = "2.13.14"
-  val scala3 = "3.3.3"
+  val scala212 = "2.12.20"
+  val scala213 = "2.13.15"
+  val scala3 = "3.3.4"
 
   // Which versions should be cross-compiled for publishing
   val scalas = List(scala212, scala213, scala3)
@@ -34,8 +33,9 @@ val versions = new {
   val idePlatform = VirtualAxis.jvm
 
   // Dependencies
+  val chimney = "1.4.0"
   val enumeratum = "1.7.5"
-  val specs2 = "4.20.8"
+  val munit = "1.0.2"
 }
 
 // Common settings:
@@ -286,7 +286,7 @@ val ciCommand = (platform: String, scalaSuffix: String) => {
   def withCoverage(tasks: String*): Vector[String] =
     "coverage" +: tasks.toVector :+ "coverageAggregate" :+ "coverageOff"
 
-  val projects = Vector("enumz")
+  val projects = Vector("enumz", "enumzChimney")
     .map(name => s"$name${if (isJVM) "" else platform}$scalaSuffix")
   def tasksOf(name: String): Vector[String] = projects.map(project => s"$project/$name")
 
@@ -373,12 +373,11 @@ lazy val root = project
   .settings(versionSchemeSettings)
   .settings(publishSettings)
   .settings(noPublishSettings)
-  .aggregate(
-    (enumz.projectRefs) *
-  )
+  .aggregate(enumz.projectRefs *)
+  .aggregate(enumzChimney.projectRefs *)
 
 lazy val enumz = projectMatrix
-  .in(file("modules/enumz"))
+  .in(file("enumz"))
   .someVariations(versions.scalas, versions.platforms)((addScalaJVM2Dir +: addScala213plusDir +: only1VersionInIDE) *)
   .enablePlugins(GitVersioning, GitBranchPrompt)
   .disablePlugins(WelcomePlugin)
@@ -393,8 +392,25 @@ lazy val enumz = projectMatrix
   .settings(mimaSettings *)
   .settings(
     libraryDependencies += "com.beachape" %%% "enumeratum" % versions.enumeratum,
-    libraryDependencies += "org.scalameta" %%% "munit" % "1.0.0" % Test
+    libraryDependencies += "org.scalameta" %%% "munit" % versions.munit % Test
   )
 
-addCommandAlias("fullTest", "test")
-addCommandAlias("fullCoverageTest", "coverage ; test ; coverageReport ; coverageAggregate")
+lazy val enumzChimney = projectMatrix
+  .in(file("enumz-chimney"))
+  .someVariations(versions.scalas, versions.platforms)((only1VersionInIDE) *)
+  .enablePlugins(GitVersioning, GitBranchPrompt)
+  .disablePlugins(WelcomePlugin)
+  .settings(
+    moduleName := "enumz-chimney",
+    name := "enumz-chimney",
+    description := "Chimney integration for runtime enum conversions using Enumz"
+  )
+  .settings(settings *)
+  .settings(versionSchemeSettings *)
+  .settings(publishSettings *)
+  // .settings(mimaSettings *) // not yet released
+  .settings(
+    libraryDependencies += "io.scalaland" %%% "chimney" % versions.chimney,
+    libraryDependencies += "org.scalameta" %%% "munit" % versions.munit % Test
+  )
+  .dependsOn(enumz)
