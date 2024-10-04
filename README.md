@@ -7,7 +7,7 @@
 
 One enum type class to rule them all.
 
-In Scala you might meet many different implementations of enums:
+In Scala, you might meet many different implementations of enums:
 
  * build-in `scala.Enumeration`,
  * sum-type based sealed hierarchies,
@@ -22,7 +22,7 @@ With a type class.
 
 ## Usage
 
-Add to your sbt (2.11, 2.12 and 2.13 supported)
+Add to your sbt (2.12, 2.13 and 3.3+ supported)
 
 ```scala
 libraryDependencies += "io.scalaland" %% "enumz" % enumzVersion // see Maven badge

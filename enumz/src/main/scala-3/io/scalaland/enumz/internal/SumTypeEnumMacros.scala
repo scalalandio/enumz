@@ -1,12 +1,14 @@
 package io.scalaland.enumz.internal
 
 import io.scalaland.enumz.Enum
+
 import scala.quoted.*
 
 object SumTypeEnumMacros {
 
   def `enum`[E: Type](using q: Quotes): Expr[Enum[E]] = {
-    import q.*, q.reflect.*
+    import q.*
+    import q.reflect.*
 
     val E = TypeRepr.of[E]
 

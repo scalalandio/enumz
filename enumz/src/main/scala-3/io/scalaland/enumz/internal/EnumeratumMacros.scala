@@ -1,12 +1,14 @@
 package io.scalaland.enumz.internal
 
 import io.scalaland.enumz.Enum
+
 import scala.quoted.*
 
 object EnumeratumMacros {
 
   def `enum`[E <: enumeratum.EnumEntry: Type](using q: Quotes): Expr[Enum[E]] = {
-    import q.*, q.reflect.*
+    import q.*
+    import q.reflect.*
 
     val E = TypeRepr.of[E]
 
