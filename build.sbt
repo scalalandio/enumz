@@ -1,4 +1,5 @@
 import com.jsuereth.sbtpgp.PgpKeys.publishSigned
+import com.typesafe.tools.mima.core.{MissingClassProblem, MissingTypesProblem, Problem, ProblemFilters}
 import commandmatrix.extra.*
 
 // Used to configure the build so that it would format on compile during development but not on CI.
@@ -268,8 +269,9 @@ val publishSettings = Seq(
 val mimaSettings = Seq(
   mimaPreviousArtifacts := {
     val previousVersions = moduleName.value match {
-      case "enumz" => Set("1.0.0").filterNot(_ => scalaVersion.value == versions.scala3)
-      case _       => Set()
+      case "enumz"         => Set("1.0.0").filterNot(_ => scalaVersion.value == versions.scala3)
+      case "enumz-chimney" => Set()
+      case _               => Set()
     }
     previousVersions.map(organization.value %% moduleName.value % _)
   },
@@ -392,7 +394,15 @@ lazy val enumz = projectMatrix
   .settings(mimaSettings *)
   .settings(
     libraryDependencies += "com.beachape" %%% "enumeratum" % versions.enumeratum,
-    libraryDependencies += "org.scalameta" %%% "munit" % versions.munit % Test
+    libraryDependencies += "org.scalameta" %%% "munit" % versions.munit % Test,
+    mimaBinaryIssueFilters := Seq(
+      // Users shouldn't rely on how we're handling implicit priorities (now we made them package private)
+      ProblemFilters.exclude[MissingClassProblem]("io.scalaland.enumz.Implicits"),
+      ProblemFilters.exclude[MissingClassProblem]("io.scalaland.enumz.LowPriorityImplicits"),
+      ProblemFilters.exclude[MissingTypesProblem]("io.scalaland.enumz.Enum$"),
+      // Changes to macros should not cause any problems
+      ProblemFilters.exclude[Problem]("io.scalaland.enumz.internal.*")
+    )
   )
 
 lazy val enumzChimney = projectMatrix
@@ -408,7 +418,7 @@ lazy val enumzChimney = projectMatrix
   .settings(settings *)
   .settings(versionSchemeSettings *)
   .settings(publishSettings *)
-  // .settings(mimaSettings *) // not yet released
+  .settings(mimaSettings *) // not yet released
   .settings(
     libraryDependencies += "io.scalaland" %%% "chimney" % versions.chimney,
     libraryDependencies += "org.scalameta" %%% "munit" % versions.munit % Test
