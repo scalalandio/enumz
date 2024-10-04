@@ -36,8 +36,6 @@ object SumTypeEnumMacros {
       }*)
     }
 
-    println(valuesExpr.asTerm.show(using Printer.TreeAnsiCode))
-
     '{
       import scala.language.dynamics
       new Enum[E] {
