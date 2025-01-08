@@ -270,8 +270,8 @@ val publishSettings = Seq(
 val mimaSettings = Seq(
   mimaPreviousArtifacts := {
     val previousVersions = moduleName.value match {
-      case "enumz"         => Set("1.0.0", "1.1.0").filterNot(_ => scalaVersion.value == versions.scala3)
-      case "enumz-chimney" => Set("1.1.0")
+      case "enumz" => Set("1.0.0").filterNot(_ => scalaVersion.value == versions.scala3) ++ Set("1.1.0", "1.2.0")
+      case "enumz-chimney" => Set("1.1.0", "1.2.0")
       case _               => Set()
     }
     previousVersions.map(organization.value %% moduleName.value % _)
