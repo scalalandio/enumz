@@ -1,6 +1,6 @@
 package io.scalaland.enumz
 
-import io.scalaland.chimney.{partial, PartialTransformer}
+import io.scalaland.chimney.{partial, PartialTransformer, Transformer}
 
 package object chimney {
 
@@ -17,4 +17,9 @@ package object chimney {
         )
     }
   }
+
+  implicit def enumToStringTransformer[From: Enum]: Transformer[From, String] = (src: From) => Enum[From].getName(src)
+
+  implicit def stringToEnumPartialTransformer[To: Enum]: PartialTransformer[String, To] = (src: String, _: Boolean) =>
+    partial.Result.fromOption(Enum[To].withNameOption(src))
 }

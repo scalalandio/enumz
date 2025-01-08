@@ -104,6 +104,7 @@ val settings = Seq(
           "-explain-types",
           "-feature",
           "-Wconf:msg=Unreachable case:s", // suppress fake (?) errors in internal.compiletime
+          "-Wconf:msg=Missing.symbol.position:s", // https://github.com/scala/scala3/issues/21672
           // "-Wnonunit-statement",
           // "-Wunused:imports", // import x.Underlying as X is marked as unused even though it is! probably one of https://github.com/scala/scala3/issues/: #18564, #19252, #19657, #19912
           "-Wunused:privates",
