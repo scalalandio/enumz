@@ -16,7 +16,7 @@ addSbtPlugin("com.typesafe" % "sbt-mima-plugin" % "1.1.4")
 // disabling projects in IDE
 addSbtPlugin("org.jetbrains" % "sbt-ide-settings" % "1.1.0")
 // documentation
-addSbtPlugin("com.github.reibitto" % "sbt-welcome" % "0.4.0")
+addSbtPlugin("com.github.reibitto" % "sbt-welcome" % "0.5.0")
 
 //libraryDependencies += "org.slf4j" % "slf4j-nop" % "1.7.25"
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
