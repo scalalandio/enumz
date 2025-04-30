@@ -36,7 +36,7 @@ val versions = new {
   // Dependencies
   val chimney = "1.7.3"
   val enumeratum = "1.7.6"
-  val munit = "1.1.0"
+  val munit = "1.1.1"
 }
 
 // Common settings:
