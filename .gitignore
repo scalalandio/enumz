@@ -11,6 +11,7 @@ docs/build
 .metals
 project/metals.sbt
 # IDEs
+.cursor
 .idea
 .vscode
 # other

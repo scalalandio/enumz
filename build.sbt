@@ -6,17 +6,13 @@ import commandmatrix.extra.*
 lazy val isCI = sys.env.get("CI").contains("true")
 ThisBuild / scalafmtOnCompile := !isCI
 
-lazy val ciRelease = taskKey[Unit](
-  "Publish artifacts to release or snapshot (skipping sonatypeBundleRelease which is unnecessary for snapshots)"
+val mavenCentralSnapshots = "Maven Central Snapshots" at "https://central.sonatype.com/repository/maven-snapshots"
+credentials += Credentials(
+  "Maven Central Repository",
+  "central.sonatype.com",
+  sys.env.getOrElse("SONATYPE_USERNAME", ""),
+  sys.env.getOrElse("SONATYPE_PASSWORD", "")
 )
-ciRelease := {
-  publishSigned.taskValue
-  Def.taskIf {
-    if (git.gitCurrentTags.value.nonEmpty) {
-      sonatypeBundleRelease.taskValue
-    }
-  }
-}
 
 // Versions:
 
@@ -252,7 +248,10 @@ val publishSettings = Seq(
       <url>https://github.com/scalalandio/enumz/issues</url>
     </issueManagement>
   ),
-  publishTo := sonatypePublishToBundle.value,
+  publishTo := {
+    if (isSnapshot.value) Some(mavenCentralSnapshots)
+    else localStaging.value
+  },
   publishMavenStyle := true,
   Test / publishArtifact := false,
   pomIncludeRepository := { _ =>
@@ -311,8 +310,7 @@ val publishLocalForTests = {
   } yield moduleVersion + "/publishLocal"
 }.mkString(" ; ")
 
-val releaseCommand = (tag: Seq[String]) =>
-  if (tag.nonEmpty) "publishSigned ; sonatypeBundleRelease" else "publishSigned"
+val releaseCommand = (tag: Seq[String]) => if (tag.nonEmpty) "publishSigned ; sonaRelease" else "publishSigned"
 
 lazy val root = project
   .in(file("."))
