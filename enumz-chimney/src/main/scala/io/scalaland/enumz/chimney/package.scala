@@ -11,7 +11,7 @@ package object chimney {
     Enum[To].values.filter(to => namesComparison.namesMatch(fromName, Enum[To].getName(to))) match {
       case Vector(value) => partial.Result.fromValue(value)
       case Vector()      => partial.Result.fromEmpty
-      case values =>
+      case values        =>
         partial.Result.fromErrorString(
           s"Multiple enum values matched for `$fromName` name: ${values.map(Enum[To].getName).mkString(", ")}"
         )
