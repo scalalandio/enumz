@@ -242,8 +242,7 @@ val settings = Seq(
     for2_12 = Seq("-Ywarn-unused:locals"), // Scala 2.12 ignores @unused warns
     for2_13 = Seq.empty,
     for3 = Seq.empty
-  ),
-  coverageScalacPluginVersion := "2.4.0" // update, since sbt-scoverage was not updated
+  )
   /*,
   Compile / compile / wartremoverWarnings ++= Warts.allBut(
     Wart.Any,
