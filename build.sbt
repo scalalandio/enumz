@@ -24,7 +24,7 @@ val versions = new {
   // Dependencies
   val chimney = "1.8.2"
   val enumeratum = "1.9.2"
-  val munit = "1.2.1"
+  val munit = "1.2.2"
 
   // Explicitly handle Scala 2 and Scala 3 separately.
   def fold2[A](scalaVersion: String)(for2: => Seq[A], for3: => Seq[A]): Seq[A] =
