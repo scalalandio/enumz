@@ -41,7 +41,7 @@ object SumTypeEnumMacros {
     '{
       import scala.language.dynamics
       new Enum[E] {
-        lazy val values: Vector[E] = ${ valuesExpr }
+        lazy val values: Vector[E] = $valuesExpr
         def getName(`enum`: E): String = `enum`.toString
       }
     }

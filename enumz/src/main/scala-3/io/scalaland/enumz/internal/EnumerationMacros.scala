@@ -26,7 +26,7 @@ private[enumz] object EnumerationMacros {
     '{
       import scala.language.dynamics
       new Enum[E] {
-        lazy val values: Vector[E] = ${ valsetExpr }.toVector.sorted(${ orderingExpr })
+        lazy val values: Vector[E] = $valsetExpr.toVector.sorted($orderingExpr)
         def getName(`enum`: E): String = `enum`.toString
       }
     }
