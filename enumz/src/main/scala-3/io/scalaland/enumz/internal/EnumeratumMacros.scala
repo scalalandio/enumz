@@ -19,7 +19,7 @@ object EnumeratumMacros {
     '{
       import scala.language.dynamics
       new Enum[E] {
-        lazy val values: Vector[E] = ${ enumExpr }.values.toVector
+        lazy val values: Vector[E] = $enumExpr.values.toVector
         def getName(`enum`: E): String = `enum`.toString
       }
     }
