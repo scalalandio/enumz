@@ -22,7 +22,7 @@ val versions = new {
   val platforms = List(VirtualAxis.jvm, VirtualAxis.js, VirtualAxis.native)
 
   // Dependencies
-  val chimney = "1.9.0"
+  val chimney = "1.10.0"
   val enumeratum = "1.9.7"
   val munit = "1.3.0"
 
