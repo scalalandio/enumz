@@ -23,7 +23,7 @@ val versions = new {
 
   // Dependencies
   val chimney = "1.10.0"
-  val enumeratum = "1.9.7"
+  val enumeratum = "1.9.8"
   val munit = "1.3.3"
 
   // Explicitly handle Scala 2 and Scala 3 separately.
